@@ -1,0 +1,11 @@
+{application,autogrow_firmware,
+             [{applications,[kernel,stdlib,elixir,logger,runtime_tools,
+                             toolshed,ring_logger,shoehorn]},
+              {description,"autogrow_firmware"},
+              {modules,['Elixir.AutogrowFirmware',
+                        'Elixir.AutogrowFirmware.Actors',
+                        'Elixir.AutogrowFirmware.Application',
+                        'Elixir.AutogrowFirmware.Sensors']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.AutogrowFirmware.Application',[]}}]}.
