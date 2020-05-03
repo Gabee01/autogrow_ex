@@ -1,6 +1,7 @@
 # AutogrowFirmware
 
-**TODO: Add description**
+Autogrow is a project for an automated greenhouse. We have actors (lamp, pump, fan) and sensors (luminosity, temperature, humidity)
+
 
 ## Targets
 
@@ -16,12 +17,18 @@ https://hexdocs.pm/nerves/targets.html#content
 
 ## Getting Started
 
+export those env vars:
+`MIX_TARGET=rpi3 #raspberry version`
+`WIFI_SSID="" #Wireless ssid`
+`WIFI_PSK="" #Wireless password`
+
 To start your Nerves app:
-  * `export MIX_TARGET=my_target` or prefix every command with
-    `MIX_TARGET=my_target`. For example, `MIX_TARGET=rpi3`
+  * `export MIX_TARGET=my_target` for all vars above or prefix every command with
+    each var like this, `MIX_TARGET=rpi3 WIFI_SSID="house" WIFI_PSK="1234 mix deps.get`
   * Install dependencies with `mix deps.get`
   * Create firmware with `mix firmware`
   * Burn to an SD card with `mix firmware.burn`
+  * (Optional, but awesome) There is a `./build.sh` script wich will build the release and upload it to the target via wireless connection (needs wireless setup first). Just put your rpi ip in the script and create the .env file with the envs above at the same level as the script
 
 ## Learn more
 
