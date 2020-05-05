@@ -10,7 +10,8 @@ defmodule AutogrowFirmware do
     Actors.switch(actor, action)
   end
 
-  def monitor(measure) do
-    Sensors.take(measure)
+  def snapshot() do
+    environment = Sensors.environment()
+    {:ok, environment}
   end
 end

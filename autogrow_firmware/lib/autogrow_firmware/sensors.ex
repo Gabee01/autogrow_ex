@@ -31,7 +31,7 @@ defmodule AutogrowFirmware.Sensors do
     one_time_high_res_mode_2: 0x21
   }
 
-  def take(measure = :luminosity) do
+  defp take(_measure = :luminosity) do
     luminosity_gpio = 35
 
     {:ok, light_sensor} = I2C.open("i2c-1")
@@ -39,14 +39,19 @@ defmodule AutogrowFirmware.Sensors do
     I2C.write(light_sensor, luminosity_gpio, <<0x10>>, [])
 
     {:ok, read_value} = I2C.read(light_sensor, luminosity_gpio, 2, [])
-    :binary.decode_unsigned(read_value)
+    {:ok, :binary.decode_unsigned(read_value)}
   end
 
-  def take(measure = :ht) do
+  defp take(_measure = :ht) do
     # System.get_env(:config, :sensors, :ht)
     ht_gpio = 18
 
-    {:ok, humidity, temperature} = NervesDHT.read(:dht11, ht_gpio)
-    {:ok, [humidity, temperature]}
+    {:ok, ht} = NervesDHT.read(:dht11, ht_gpio)
+    {:ok, ht}
+  end
+
+  def environment() do
+    {:ok, [humidity, temperature]} = take(:ht)
+    {:ok, humidity: humidity, temperature: temperature, luminosity: take(:luminosity)}
   end
 end
