@@ -37,3 +37,4 @@ To start your Nerves app:
   * Forum: https://elixirforum.com/c/nerves-forum
   * Discussion Slack elixir-lang #nerves ([Invite](https://elixir-slackin.herokuapp.com/))
   * Source: https://github.com/nerves-project/nerves
+  * Didn't read, but related: https://frank.kumro.io/building-a-raspberry-pi-weather-station-with-elixir-nerves-part-1/

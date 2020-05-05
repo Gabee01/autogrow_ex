@@ -45,8 +45,8 @@ defmodule AutogrowFirmware.Sensors do
   def take(measure = :ht) do
     # System.get_env(:config, :sensors, :ht)
     ht_gpio = 18
-    {:ok, humidity, temperature} = NervesDHT.read(:dht11, ht_gpio)
 
+    {:ok, humidity, temperature} = NervesDHT.read(:dht11, ht_gpio)
     {:ok, [humidity, temperature]}
   end
 end

@@ -50,7 +50,7 @@ defmodule AutogrowFirmware.MixProject do
       {:vintage_net_wifi, "~> 0.7.0", targets: @all_targets},
       {:circuits_gpio, "~> 0.4", targets: @all_targets},
       {:circuits_i2c, "~> 0.1", targets: @all_targets},
-      {:nerves_dht, git: "https://github.com/visciang/nerves_dht.git", targets: @all_targets},
+      {:nerves_dht, git: "https://github.com/Gabee01/nerves_dht", targets: @all_targets},
 
       # Dependencies for specific targets
       {:nerves_system_rpi, "~> 1.11", runtime: false, targets: :rpi},
