@@ -31,7 +31,7 @@ defmodule AutogrowFirmware.MixProject do
   def application do
     [
       mod: {AutogrowFirmware.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :autogrow_server]
     ]
   end
 
@@ -39,7 +39,8 @@ defmodule AutogrowFirmware.MixProject do
   defp deps do
     [
       # Phoenix server dependencies
-      {:user_interface, path: "../user_interface"},
+      {:autogrow_server, in_umbrella: true},
+      {:phoenix_pubsub, "~> 2.0"},
       {:nerves_networking, github: "nerves-project/nerves_networking"},
 
       # Dependencies for all targets
@@ -47,6 +48,7 @@ defmodule AutogrowFirmware.MixProject do
       {:shoehorn, "~> 0.6"},
       {:ring_logger, "~> 0.6"},
       {:toolshed, "~> 0.2"},
+      {:telemetry, "~> 0.4.0"},
 
       # Dependencies for all targets except :host
       {:nerves_runtime, "~> 0.6", targets: @all_targets},
@@ -54,7 +56,7 @@ defmodule AutogrowFirmware.MixProject do
       {:vintage_net_wifi, "~> 0.7.0", targets: @all_targets},
       # {:circuits_gpio, "~> 0.4", targets: @all_targets},
       # {:circuits_i2c, "~> 0.1", targets: @all_targets},
-      {:nerves_dht, git: "https://github.com/Gabee01/nerves_dht", targets: @all_targets},
+      {:dht, "~> 0.1"},
       {:elixir_ale, "~> 1.2"},
       # Dependencies for specific targets
       {:nerves_system_rpi, "~> 1.11", runtime: false, targets: :rpi},

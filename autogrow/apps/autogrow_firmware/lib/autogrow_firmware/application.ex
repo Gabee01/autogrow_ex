@@ -15,8 +15,10 @@ defmodule AutogrowFirmware.Application do
         # Children for all targets
         # Starts a worker by calling: AutogrowFirmware.Worker.start_link(arg)
         # {AutogrowFirmware.Worker, arg},
+        {Phoenix.PubSub, name: AutogrowServer.PubSub}
       ] ++ children(target())
 
+    AutogrowFirmware.Environment.start_link(opts)
     Supervisor.start_link(children, opts)
   end
 
@@ -36,7 +38,6 @@ defmodule AutogrowFirmware.Application do
       |> List.first()
 
     # TODO: read those from env vars
-    dht_pin = 18
     lamp_pin = 13
     fan_pin = 19
 
@@ -58,8 +59,7 @@ defmodule AutogrowFirmware.Application do
         id: Luminosity,
         name: Luminosity,
         start: {ElixirALE.I2C, :start_link, ["i2c-1", lum_i2c_address]}
-      },
-      {NervesDHT, [name: :dht, sensor: :dht11, pin: dht_pin]}
+      }
     ]
   end
 

@@ -21,8 +21,7 @@ config :nerves_runtime, :kernel, use_system_registry: false
 keys =
   [
     Path.join([System.user_home!(), ".ssh", "id_rsa.pub"]),
-    Path.join([System.user_home!(), ".ssh", "id_ecdsa.pub"]),
-    Path.join([System.user_home!(), ".ssh", "id_ed25519.pub"])
+    Path.join([System.user_home!(), ".ssh", "iphone.pub"])
   ]
   |> Enum.filter(&File.exists?/1)
 
@@ -94,6 +93,14 @@ config :vintage_net,
     {"usb0", %{type: VintageNetDirect}}
   ]
 
+config :autogrow_firmware,
+  dht: %{
+    pin: 18,
+    version: :dht11,
+    # seconds
+    update_interval: 15
+  }
+
 # config :actors,
 #   lamp: 13,
 #   fan: 19
@@ -105,15 +112,16 @@ config :vintage_net,
 # pump: 1x
 
 # Server configurations
+import_config "../../autogrow_server/config/prod.exs"
 
-config :user_interface, UserInterfaceWeb.Endpoint,
+config :autogrow_server, AutogrowServerWeb.Endpoint,
   http: [port: 80],
   url: [host: "autogrow.local", port: 80],
   secret_key_base: "9ITPa/5VNZ8zvAfNsT8bHHX+8s/ZK4j/L/C9QsO0RlS//Hd3tZaxEfGy1VlT6BGe",
   root: Path.dirname(__DIR__),
   server: true,
-  render_errors: [view: UserInterfaceWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: UserInterface.PubSub,
+  render_errors: [view: AutogrowServerWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: AutogrowServer.PubSub,
   live_view: [signing_salt: "037tr3tR"]
 
 # Use Jason for JSON parsing in Phoenix

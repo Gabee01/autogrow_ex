@@ -1,4 +1,4 @@
-defmodule AutogrowFirmware.Sensors.Luminosity do
+defmodule AutogrowFirmware.Environment.Illumination do
   @i2c_driver Application.get_env(:autogrow_framework, :i2c_driver)
 
   @luminosity_configurations %{
@@ -32,24 +32,24 @@ defmodule AutogrowFirmware.Sensors.Luminosity do
   # defp luminosity_gpio(), do: 35
   # defp ht_gpio(), do: 18
 
-  defp configure(:luminosity, configuration) do
-    with true <- configuration in Map.keys(@luminosity_configurations) do
-      config_value = Map.get(@luminosity_configurations, configuration)
-      write(Luminosity, config_value)
-    end
-  end
+  # defp configure(:luminosity, configuration) do
+  #   with true <- configuration in Map.keys(@luminosity_configurations) do
+  #     config_value = Map.get(@luminosity_configurations, configuration)
+  #     write(Luminosity, config_value)
+  #   end
+  # end
 
-  defp write(name, value) do
-    GenServer.call(name, {:write, value})
-  end
+  # defp write(name, value) do
+  #   GenServer.call(name, {:write, value})
+  # end
 
-  defp read(name, bytes) do
-    GenServer.call(name, {:read, bytes})
-  end
+  # defp read(name, bytes) do
+  #   GenServer.call(name, {:read, bytes})
+  # end
 
-  def take() do
-    with read_value <- read(Luminosity, 2) do
-      {:ok, :binary.decode_unsigned(read_value)}
-    end
-  end
+  # def take() do
+  #   with read_value <- read(Luminosity, 2) do
+  #     {:ok, :binary.decode_unsigned(read_value)}
+  #   end
+  # end
 end

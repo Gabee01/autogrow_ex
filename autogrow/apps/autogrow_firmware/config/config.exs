@@ -7,6 +7,14 @@ import Config
 
 config :autogrow_firmware, target: Mix.target()
 
+config :autogrow_firmware,
+  dht: %{
+    pin: 18,
+    version: :dht11,
+    # seconds
+    update_interval: 15
+  }
+
 # Customize non-Elixir parts of the firmware. See
 # https://hexdocs.pm/nerves/advanced-configuration.html for details.
 
