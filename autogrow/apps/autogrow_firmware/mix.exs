@@ -9,6 +9,10 @@ defmodule AutogrowFirmware.MixProject do
     [
       app: @app,
       version: @version,
+      build_path: "../../_build",
+      config_path: "../../config/config.exs",
+      deps_path: "../../deps",
+      lockfile: "../../mix.lock",
       elixir: "~> 1.9",
       archives: [nerves_bootstrap: "~> 1.8"],
       start_permanent: Mix.env() == :prod,
